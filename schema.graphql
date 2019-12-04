@@ -1,4 +1,7 @@
-directive @cacheControl(maxAge: Int, scope: CacheControlScope) on FIELD_DEFINITION | OBJECT | INTERFACE
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
 
 enum CacheControlScope {
   PUBLIC
@@ -6,6 +9,7 @@ enum CacheControlScope {
 }
 
 type Continent {
+  strangeID: ID
   code: String
   name: String
   countries: [Country]
@@ -39,6 +43,7 @@ type Query {
   language(code: String): Language
 }
 
-"""The `Upload` scalar type represents a file upload."""
+"""
+The `Upload` scalar type represents a file upload.
+"""
 scalar Upload
-

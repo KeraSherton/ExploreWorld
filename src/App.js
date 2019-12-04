@@ -1,45 +1,87 @@
 import React from "react";
 import "./App.css";
-import fetchGraphQL from "./fetchGraphQL";
 import graphql from "babel-plugin-relay/macro";
+import {
+  RelayEnvironmentProvider,
+  preloadQuery,
+  usePreloadedQuery
+} from "react-relay/hooks";
+import RelayEnvironment from "./RelayEnvironment";
+import CountryList from "./CountryList";
+import { useState } from "react";
 
-const { useState, useEffect } = React;
-
-function App() {
-  // We'll load the name of a repository, initially setting it to null
-  const [name, setName] = useState(null);
-
-  // When the component mounts we'll fetch a repository name
-  useEffect(() => {
-    let isMounted = true;
-    fetchGraphQL(`
-      
-    `)
-      .then(response => {
-        // Avoid updating state if the component unmounted before the fetch completes
-        if (!isMounted) {
-          return;
+const { Suspense } = React;
+// Define a query
+const ContinentQuery = graphql`
+  query AppQuery {
+    continent(code: "EU") {
+      name
+      countries {
+        name
+        native
+        phone
+        languages {
+          name
         }
-        const data = response.data;
-        setName(data.continent.name);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+        currency
+      }
+    }
+  }
+`;
 
-    return () => {
-      isMounted = false;
-    };
-  }, [fetchGraphQL]);
+const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery, {});
 
-  // Render "Loading" until the query completes
+// Inner component that reads the preloaded query results via `usePreloadedQuery()`.
+// This works as follows:
+// - If the query has completed, it returns the results of the query.
+// - If the query is still pending, it "suspends" (indicates to React is isn't
+//   ready to render yet). This will show the nearest <Suspense> fallback.
+// - If the query failed, it throws the failure error. For simplicity we aren't
+//   handling the failure case here.
+function App(props) {
+  const data = usePreloadedQuery(ContinentQuery, props.preloadedQuery, {});
+  console.log(data);
+  const [country, setCountry] = useState("");
+  // {
+  //   name: "Poland",
+  //   native: "Polska",
+  //   phone: "48",
+  //   currency: "PLN"
+  // }
   return (
     <div className="App">
       <header className="App-header">
-        <p>{name != null ? ` ${continent.name}` : "Loading"}</p>
+        <h1>
+          Explore <text className="continent">{data.continent.name}</text>
+        </h1>
       </header>
+      <div className="country-div">
+        <select value={country.name} onChange={e => setCountry(e.target.value)}>
+          {data.continent.countries.map(country => (
+            <option key={country.code} value={country.code} name={country.name}>
+              {country.name}
+            </option>
+          ))}
+        </select>
+        <CountryList country={country} data={data} />
+      </div>
     </div>
   );
 }
 
-export default App;
+// The above component needs to know how to access the Relay environment, and we
+// need to specify a fallback in case it suspends:
+// - <RelayEnvironmentProvider> tells child components how to talk to the current
+//   Relay Environment instance
+// - <Suspense> specifies a fallback in case a child suspends.
+function AppRoot(props) {
+  return (
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
+      <Suspense fallback={"Loading..."}>
+        <App preloadedQuery={preloadedQuery} />
+      </Suspense>
+    </RelayEnvironmentProvider>
+  );
+}
+
+export default AppRoot;
