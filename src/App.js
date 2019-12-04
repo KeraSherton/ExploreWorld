@@ -17,6 +17,7 @@ const ContinentQuery = graphql`
     continent(code: "EU") {
       name
       countries {
+        code
         name
         native
         phone
@@ -41,29 +42,31 @@ const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery, {});
 function App(props) {
   const data = usePreloadedQuery(ContinentQuery, props.preloadedQuery, {});
   console.log(data);
-  const [country, setCountry] = useState("");
-  // {
-  //   name: "Poland",
-  //   native: "Polska",
-  //   phone: "48",
-  //   currency: "PLN"
-  // }
+
+  const exampleCountry = {
+    name: "Poland",
+    native: "Polska",
+    phone: "48",
+    currency: "PLN"
+  };
+  const [country, setCountry] = useState(exampleCountry.name);
   return (
     <div className="App">
       <header className="App-header">
         <h1>
-          Explore <text className="continent">{data.continent.name}</text>
+          Explore <txt className="continent">{data.continent.name}</txt>
         </h1>
       </header>
       <div className="country-div">
-        <select value={country.name} onChange={e => setCountry(e.target.value)}>
+        <select value={country} onChange={e => setCountry(e.target.value)}>
           {data.continent.countries.map(country => (
-            <option key={country.code} value={country.code} name={country.name}>
+            <option key={country.code} name={country.name}>
               {country.name}
             </option>
           ))}
         </select>
-        <CountryList country={country} data={data} />
+
+        <CountryList country={country} />
       </div>
     </div>
   );

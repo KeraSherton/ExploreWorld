@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash aa0c84e44520b26048275899b6f79435
+ * @relayHash 6d38f1ecc7fc07f1e9726f86cb2ec318
  */
 
 /* eslint-disable */
@@ -14,6 +14,7 @@ export type AppQueryResponse = {|
   +continent: ?{|
     +name: ?string,
     +countries: ?$ReadOnlyArray<?{|
+      +code: ?string,
       +name: ?string,
       +native: ?string,
       +phone: ?string,
@@ -36,6 +37,7 @@ query AppQuery {
   continent(code: "EU") {
     name
     countries {
+      code
       name
       native
       phone
@@ -82,6 +84,13 @@ v1 = [
         "concreteType": "Country",
         "plural": true,
         "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "code",
+            "args": null,
+            "storageKey": null
+          },
           (v0/*: any*/),
           {
             "kind": "ScalarField",
@@ -141,11 +150,11 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery {\n  continent(code: \"EU\") {\n    name\n    countries {\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n    }\n  }\n}\n",
+    "text": "query AppQuery {\n  continent(code: \"EU\") {\n    name\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '4d5c8ff5869cd655b9e6ebee36dab7b3';
+(node/*: any*/).hash = 'dd4713c5adfb94119dd9ef6626ec1108';
 module.exports = node;

@@ -14,9 +14,9 @@
 }
 .continent {
   color: green;
+  text-align: right;
 }
-.country-div {
-}
+
 .country-name {
   color: rgb(206, 41, 41);
 }
