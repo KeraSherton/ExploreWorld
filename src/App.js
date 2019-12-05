@@ -9,12 +9,13 @@ import {
 import RelayEnvironment from "./RelayEnvironment";
 import CountryList from "./CountryList";
 import { useState } from "react";
+import wrld from "./images/Download-World-PNG-Free-Download.png";
 
 const { Suspense } = React;
 // Define a query
 const ContinentQuery = graphql`
   query AppQuery {
-    continent(code: "EU") {
+    continents {
       name
       countries {
         code
@@ -25,6 +26,7 @@ const ContinentQuery = graphql`
           name
         }
         currency
+        emoji
       }
     }
   }
@@ -32,41 +34,81 @@ const ContinentQuery = graphql`
 
 const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery, {});
 
-// Inner component that reads the preloaded query results via `usePreloadedQuery()`.
-// This works as follows:
-// - If the query has completed, it returns the results of the query.
-// - If the query is still pending, it "suspends" (indicates to React is isn't
-//   ready to render yet). This will show the nearest <Suspense> fallback.
-// - If the query failed, it throws the failure error. For simplicity we aren't
-//   handling the failure case here.
 function App(props) {
   const data = usePreloadedQuery(ContinentQuery, props.preloadedQuery, {});
   console.log(data);
 
-  const exampleCountry = {
-    name: "Poland",
-    native: "Polska",
-    phone: "48",
-    currency: "PLN"
+  // const exampleCountry = {
+  //   name: "Poland",
+  //   native: "Polska",
+  //   phone: "48",
+  //   currency: "PLN"
+  // };
+
+  const [country, setCountry] = useState("");
+  const [continent, setContinent] = useState("World");
+  const [filteredData, setFilteredData] = useState("");
+  const checkContinent = () => {
+    return data.continents.continent.name === continent;
   };
-  const [country, setCountry] = useState(exampleCountry.name);
+  const message = "Click me!";
+  const handleClick = () => {
+    if (continent === "World") {
+      setContinent("Europe");
+    } else if (continent === "Europe") {
+      setContinent("Asia");
+    } else if (continent === "Asia") {
+      setContinent("Africa");
+    } else if (continent === "Africa") {
+      setContinent("North America");
+    } else if (continent === "North America") {
+      setContinent("South America");
+    } else if (continent === "South America") {
+      setContinent("Oceania");
+    } else if (continent === "Oceania") {
+      setContinent("Europe");
+    }
+  };
+  const handleFilter = () => {
+    if (continent !== "World") {
+      setFilteredData(data.filter(checkContinent));
+    } else return alert("Click World!");
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>
-          Explore <txt className="continent">{data.continent.name}</txt>
+          Explore
+          <div
+            // onMouseOver={message}
+            onClick={handleClick}
+            className="continent"
+          >
+            {continent}
+          </div>
         </h1>
+        {/* button will load countries fron continent */}
+        <input
+          type="image"
+          src={wrld}
+          className="button"
+          onClick={handleFilter}
+          alt="Go"
+        />
       </header>
       <div className="country-div">
-        <select value={country} onChange={e => setCountry(e.target.value)}>
-          {data.continent.countries.map(country => (
-            <option key={country.code} name={country.name}>
-              {country.name}
-            </option>
-          ))}
-        </select>
+        {continent === "World" ? null : (
+          <select value={country} onChange={e => setCountry(e.target.value)}>
+            {filteredData.continents.continent.countries.map(country => (
+              <option key={country.code} name={country.name}>
+                {country.name}
+              </option>
+            ))}
+          </select>
+        )}
 
-        <CountryList country={country} />
+        <CountryList country={country} data={data} />
       </div>
     </div>
   );

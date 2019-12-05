@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6d38f1ecc7fc07f1e9726f86cb2ec318
+ * @relayHash 9e12ff4a4ae1f16bd4e003c3516512ce
  */
 
 /* eslint-disable */
@@ -11,7 +11,7 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type AppQueryVariables = {||};
 export type AppQueryResponse = {|
-  +continent: ?{|
+  +continents: ?$ReadOnlyArray<?{|
     +name: ?string,
     +countries: ?$ReadOnlyArray<?{|
       +code: ?string,
@@ -22,8 +22,9 @@ export type AppQueryResponse = {|
         +name: ?string
       |}>,
       +currency: ?string,
+      +emoji: ?string,
     |}>,
-  |}
+  |}>
 |};
 export type AppQuery = {|
   variables: AppQueryVariables,
@@ -34,7 +35,7 @@ export type AppQuery = {|
 
 /*
 query AppQuery {
-  continent(code: "EU") {
+  continents {
     name
     countries {
       code
@@ -45,6 +46,7 @@ query AppQuery {
         name
       }
       currency
+      emoji
     }
   }
 }
@@ -62,17 +64,11 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "continent",
-    "storageKey": "continent(code:\"EU\")",
-    "args": [
-      {
-        "kind": "Literal",
-        "name": "code",
-        "value": "EU"
-      }
-    ],
+    "name": "continents",
+    "storageKey": null,
+    "args": null,
     "concreteType": "Continent",
-    "plural": false,
+    "plural": true,
     "selections": [
       (v0/*: any*/),
       {
@@ -124,6 +120,13 @@ v1 = [
             "name": "currency",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "emoji",
+            "args": null,
+            "storageKey": null
           }
         ]
       }
@@ -150,11 +153,11 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery {\n  continent(code: \"EU\") {\n    name\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n    }\n  }\n}\n",
+    "text": "query AppQuery {\n  continents {\n    name\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n      emoji\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'dd4713c5adfb94119dd9ef6626ec1108';
+(node/*: any*/).hash = '763d4db429bdf5ba356502083d40ebb2';
 module.exports = node;

@@ -23,3 +23,11 @@
 .list {
   color: rgb(216, 219, 38);
 }
+
+.button {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  /* background-image: url("./images/Download-World-PNG-Free-Download.png"); */
+  border-radius: 50%;
+}

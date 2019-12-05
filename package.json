@@ -8,7 +8,8 @@
     "react-relay": "^0.0.0-experimental-a1a40b68",
     "react-scripts": "3.2.0",
     "relay-runtime": "7.0.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "webpack": "4.41.0"
   },
   "scripts": {
     "start": "yarn run relay && react-scripts start",
