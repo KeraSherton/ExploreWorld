@@ -10,7 +10,6 @@ async function fetchGraphQL(text, variables) {
       variables
     })
   });
-  console.log(response.json);
   return await response.json();
 }
 

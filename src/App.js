@@ -48,10 +48,7 @@ function App(props) {
   const [country, setCountry] = useState("");
   const [continent, setContinent] = useState("World");
   const [filteredData, setFilteredData] = useState("");
-  const checkContinent = () => {
-    return data.continents.name === continent;
-  };
-  const message = "Click me!";
+
   const handleClick = () => {
     if (continent === "World") {
       setContinent("Europe");
@@ -69,11 +66,24 @@ function App(props) {
       setContinent("Europe");
     }
   };
+
+  // const checkContinent = () => {
+  //   return data.continents.name === continent;
+  // };
+  // const message = "Click me!";
+  //  const filterData(continent) {
+  //     data.filter(continents.name === continent);
+  //     };
+  //   }
+
+  function checkName(name) {
+    return name === continent;
+  }
+
   const handleFilter = () => {
     if (continent !== "World") {
-      let fdata = data.continents.filter(checkContinent);
-      console.log(fdata); //empty arr
-      setFilteredData(fdata);
+      setFilteredData(data.filter(checkName));
+      console.log(filteredData);
     } else return alert("First click World!");
   };
 
