@@ -49,7 +49,7 @@ function App(props) {
   const [continent, setContinent] = useState("World");
   const [filteredData, setFilteredData] = useState("");
   const checkContinent = () => {
-    return data.continents.continent.name === continent;
+    return data.continents.name === continent;
   };
   const message = "Click me!";
   const handleClick = () => {
@@ -71,8 +71,10 @@ function App(props) {
   };
   const handleFilter = () => {
     if (continent !== "World") {
-      setFilteredData(data.filter(checkContinent));
-    } else return alert("Click World!");
+      let fdata = data.continents.filter(checkContinent);
+      console.log(fdata); //empty arr
+      setFilteredData(fdata);
+    } else return alert("First click World!");
   };
 
   return (
@@ -100,11 +102,12 @@ function App(props) {
       <div className="country-div">
         {continent === "World" ? null : (
           <select value={country} onChange={e => setCountry(e.target.value)}>
-            {filteredData.continents.continent.countries.map(country => (
+            {/* {filteredData.continents.continent.countries.map(country => (
               <option key={country.code} name={country.name}>
                 {country.name}
               </option>
-            ))}
+            ))} */}{" "}
+            {filteredData}
           </select>
         )}
 
@@ -114,11 +117,6 @@ function App(props) {
   );
 }
 
-// The above component needs to know how to access the Relay environment, and we
-// need to specify a fallback in case it suspends:
-// - <RelayEnvironmentProvider> tells child components how to talk to the current
-//   Relay Environment instance
-// - <Suspense> specifies a fallback in case a child suspends.
 function AppRoot(props) {
   return (
     <RelayEnvironmentProvider environment={RelayEnvironment}>
