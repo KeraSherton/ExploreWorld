@@ -1,15 +1,18 @@
 import React from "react";
+import { useState } from "react";
 import "./App.css";
-import graphql from "babel-plugin-relay/macro";
+
 import {
   RelayEnvironmentProvider,
   preloadQuery,
   usePreloadedQuery
 } from "react-relay/hooks";
+import graphql from "babel-plugin-relay/macro";
 import RelayEnvironment from "./RelayEnvironment";
-import CountryList from "./CountryList";
-import { useState } from "react";
+// import CountryTile from "./CountryList";
+
 import wrld from "./images/Download-World-PNG-Free-Download.png";
+import CountryDataFetch from "./CountryContainer";
 
 const { Suspense } = React;
 // Define a query
@@ -18,21 +21,13 @@ const ContinentQuery = graphql`
     continents {
       name
       countries {
-        code
         name
-        native
-        phone
-        languages {
-          name
-        }
-        currency
-        emoji
       }
     }
   }
 `;
 
-const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery, {});
+const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery);
 
 function App(props) {
   const data = usePreloadedQuery(ContinentQuery, props.preloadedQuery, {});
@@ -46,24 +41,32 @@ function App(props) {
   // };
 
   const [country, setCountry] = useState("");
-  const [continent, setContinent] = useState("World");
-  const [filteredData, setFilteredData] = useState("");
+  const [code, setCode] = useState("");
+  const [userContinent, setUserContinent] = useState("World");
+  const [CountryData, setCountryData] = useState("");
 
   const handleClick = () => {
-    if (continent === "World") {
-      setContinent("Europe");
-    } else if (continent === "Europe") {
-      setContinent("Asia");
-    } else if (continent === "Asia") {
-      setContinent("Africa");
-    } else if (continent === "Africa") {
-      setContinent("North America");
-    } else if (continent === "North America") {
-      setContinent("South America");
-    } else if (continent === "South America") {
-      setContinent("Oceania");
-    } else if (continent === "Oceania") {
-      setContinent("Europe");
+    if (userContinent === "World") {
+      setUserContinent("Europe");
+      setCode("EU");
+    } else if (userContinent === "Europe") {
+      setUserContinent("Asia");
+      setCode("AS");
+    } else if (userContinent === "Asia") {
+      setUserContinent("Africa");
+      setCode("AF");
+    } else if (userContinent === "Africa") {
+      setUserContinent("North America");
+      setCode("NA");
+    } else if (userContinent === "North America") {
+      setUserContinent("South America");
+      setCode("SA");
+    } else if (userContinent === "South America") {
+      setUserContinent("Oceania");
+      setCode("OC");
+    } else if (userContinent === "Oceania") {
+      setUserContinent("Europe");
+      setCode("EU");
     }
   };
 
@@ -76,17 +79,25 @@ function App(props) {
   //     };
   //   }
 
-  function checkName(name) {
-    return name === continent;
-  }
+  // function checkName(name) {
+  //   return name === continent;
+  // }
 
+  // const countryData = data.continents.map((continent, code)=> <country key={code} name={data.continent.countries.name}/> );
+  // data.continents.filter((continent, code) => (
+  //   <chContinent key={code} name={data.continent.name} />
+  // ));
+  // () => {
+  //     if (continent !== "World") {
   const handleFilter = () => {
-    if (continent !== "World") {
-      setFilteredData(data.filter(checkName));
-      console.log(filteredData);
-    } else return alert("First click World!");
+    let data = CountryDataFetch();
+    setCountryData(data);
   };
 
+  // setFilteredData(countryData);
+  // console.log("ok");
+  // } else return alert("First click World!");
+  // };
   return (
     <div className="App">
       <header className="App-header">
@@ -97,7 +108,7 @@ function App(props) {
             onClick={handleClick}
             className="continent"
           >
-            {continent}
+            {userContinent}
           </div>
         </h1>
         {/* button will load countries fron continent */}
@@ -110,19 +121,28 @@ function App(props) {
         />
       </header>
       <div className="country-div">
-        {continent === "World" ? null : (
-          <select value={country} onChange={e => setCountry(e.target.value)}>
-            {/* {filteredData.continents.continent.countries.map(country => (
-              <option key={country.code} name={country.name}>
-                {country.name}
-              </option>
-            ))} */}{" "}
-            {filteredData}
-          </select>
-        )}
-
-        <CountryList country={country} data={data} />
+        {userContinent === "World"
+          ? null
+          : // (
+            //   <select
+            //     value={CountryData.name}
+            //     onChange={e => setCountry(e.target.value)}
+            //   >
+            //     {CountryData.map(country => (
+            //       <option
+            //         key={country.code}
+            //         value={country.name}
+            //         name={country.name}
+            //       >
+            //         {country.name}
+            //       </option>
+            //     ))}
+            //   </select>
+            // )
+            console.log(CountryData)}
       </div>
+      <h2> {country} </h2>
+      {/* <CountryTile country={country} /> */}
     </div>
   );
 }

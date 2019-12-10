@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9e12ff4a4ae1f16bd4e003c3516512ce
+ * @relayHash 9021ad0a218d21b8fdd72e3373c8f8aa
  */
 
 /* eslint-disable */
@@ -14,15 +14,7 @@ export type AppQueryResponse = {|
   +continents: ?$ReadOnlyArray<?{|
     +name: ?string,
     +countries: ?$ReadOnlyArray<?{|
-      +code: ?string,
-      +name: ?string,
-      +native: ?string,
-      +phone: ?string,
-      +languages: ?$ReadOnlyArray<?{|
-        +name: ?string
-      |}>,
-      +currency: ?string,
-      +emoji: ?string,
+      +name: ?string
     |}>,
   |}>
 |};
@@ -38,15 +30,7 @@ query AppQuery {
   continents {
     name
     countries {
-      code
       name
-      native
-      phone
-      languages {
-        name
-      }
-      currency
-      emoji
     }
   }
 }
@@ -80,54 +64,7 @@ v1 = [
         "concreteType": "Country",
         "plural": true,
         "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "code",
-            "args": null,
-            "storageKey": null
-          },
-          (v0/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "native",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "phone",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "languages",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Language",
-            "plural": true,
-            "selections": [
-              (v0/*: any*/)
-            ]
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "currency",
-            "args": null,
-            "storageKey": null
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "emoji",
-            "args": null,
-            "storageKey": null
-          }
+          (v0/*: any*/)
         ]
       }
     ]
@@ -153,11 +90,11 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery {\n  continents {\n    name\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n      emoji\n    }\n  }\n}\n",
+    "text": "query AppQuery {\n  continents {\n    name\n    countries {\n      name\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '763d4db429bdf5ba356502083d40ebb2';
+(node/*: any*/).hash = 'df2442d45bbe28b25e6cacd0b2aa4784';
 module.exports = node;

@@ -1,9 +1,11 @@
 import React from "react";
+import CountryData from "./CountryContainer";
 
-const CountryTile = props => {
-  console.log(props);
+const CountryTile = () => {
+  console.log(CountryData);
   return (
-    <>
+    <div>
+      {CountryData.map}
       <h2 className="country-name">{props.country}</h2>
       <ul className="list">
         {/* <li>Native name: {props.country.native}</li>
@@ -11,7 +13,7 @@ const CountryTile = props => {
         <li>Currency: {props.country.currency}</li>
         <li>Flag: {props.country.emoji} </li> */}
       </ul>
-    </>
+    </div>
   );
 };
 

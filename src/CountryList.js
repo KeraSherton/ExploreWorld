@@ -1,10 +1,17 @@
 import React from "react";
-import CountryTile from "./CountryTile.js";
+import { useState } from "react";
+import CountryData from "./CountryContainer";
 
-const CountryList = props => {
-  // console.log(props);
+const CountryList = () => {
+  const [country, setCountry] = useState("");
   return (
-    <div>{props.country ? <CountryTile country={props.country} /> : null}</div>
+    <select value={CountryData.name} onChange={e => setCountry(e.target.value)}>
+      {CountryData.continent.countries.map(country => (
+        <option key={country.code} value={country.code} name={country.name}>
+          {country.name}
+        </option>
+      ))}
+    </select>
   );
 };
 export default CountryList;
