@@ -23,3 +23,10 @@
 .list {
   color: rgb(216, 219, 38);
 }
+
+.button {
+  height: 50px;
+  width: 50px;
+  background-color: rgba(54, 150, 83, 0.651);
+  border-radius: 50%;
+}

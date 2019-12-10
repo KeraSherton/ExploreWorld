@@ -1,21 +1,22 @@
 import React from "react";
+import { useState } from "react";
 import "./App.css";
-import graphql from "babel-plugin-relay/macro";
 import {
   RelayEnvironmentProvider,
   preloadQuery,
   usePreloadedQuery
 } from "react-relay/hooks";
+import graphql from "babel-plugin-relay/macro";
 import RelayEnvironment from "./RelayEnvironment";
-import CountryList from "./CountryList";
-import { useState } from "react";
+import wrld from "./images/Download-World-PNG-Free-Download.png";
+import CountryTile from "./CountryTile";
 
 const { Suspense } = React;
-// Define a query
+
 const ContinentQuery = graphql`
   query AppQuery {
-    continent(code: "EU") {
-      name
+    continents {
+      code
       countries {
         code
         name
@@ -25,58 +26,79 @@ const ContinentQuery = graphql`
           name
         }
         currency
+        emoji
       }
     }
   }
 `;
 
-const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery, {});
+const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery);
 
-// Inner component that reads the preloaded query results via `usePreloadedQuery()`.
-// This works as follows:
-// - If the query has completed, it returns the results of the query.
-// - If the query is still pending, it "suspends" (indicates to React is isn't
-//   ready to render yet). This will show the nearest <Suspense> fallback.
-// - If the query failed, it throws the failure error. For simplicity we aren't
-//   handling the failure case here.
 function App(props) {
   const data = usePreloadedQuery(ContinentQuery, props.preloadedQuery, {});
   console.log(data);
 
-  const exampleCountry = {
-    name: "Poland",
-    native: "Polska",
-    phone: "48",
-    currency: "PLN"
+  const [country, setCountry] = useState("");
+  const [code, setCode] = useState("");
+  const [userContinent, setUserContinent] = useState("World");
+
+  const handleClick = () => {
+    if (userContinent === "World") {
+      setUserContinent("Europe");
+      setCode("EU");
+    } else if (userContinent === "Europe") {
+      setUserContinent("Asia");
+      setCode("AS");
+    } else if (userContinent === "Asia") {
+      setUserContinent("Africa");
+      setCode("AF");
+    } else if (userContinent === "Africa") {
+      setUserContinent("North America");
+      setCode("NA");
+    } else if (userContinent === "North America") {
+      setUserContinent("South America");
+      setCode("SA");
+    } else if (userContinent === "South America") {
+      setUserContinent("Oceania");
+      setCode("OC");
+    } else if (userContinent === "Oceania") {
+      setUserContinent("Europe");
+      setCode("EU");
+    }
   };
-  const [country, setCountry] = useState(exampleCountry.name);
+  const continents = data.continents;
+  const continentData = continents.filter(function(item) {
+    return item.code.includes(code);
+  })[0];
   return (
     <div className="App">
       <header className="App-header">
         <h1>
-          Explore <txt className="continent">{data.continent.name}</txt>
+          Explore
+          <div onClick={handleClick} className="continent">
+            {userContinent}
+          </div>
         </h1>
+        <input type="image" src={wrld} className="button" alt="Go" />
       </header>
       <div className="country-div">
-        <select value={country} onChange={e => setCountry(e.target.value)}>
-          {data.continent.countries.map(country => (
-            <option key={country.code} name={country.name}>
-              {country.name}
-            </option>
-          ))}
-        </select>
-
-        <CountryList country={country} />
+        {userContinent === "World" ? null : (
+          <select value={country} onChange={e => setCountry(e.target.value)}>
+            {continentData.countries.map(country => (
+              <option key={country.code} name={country.name}>
+                {country.name}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
+      {userContinent !== "World" ? (
+        <CountryTile country={country} continentData={continentData} />
+      ) : null}
     </div>
   );
 }
 
-// The above component needs to know how to access the Relay environment, and we
-// need to specify a fallback in case it suspends:
-// - <RelayEnvironmentProvider> tells child components how to talk to the current
-//   Relay Environment instance
-// - <Suspense> specifies a fallback in case a child suspends.
 function AppRoot(props) {
   return (
     <RelayEnvironmentProvider environment={RelayEnvironment}>
