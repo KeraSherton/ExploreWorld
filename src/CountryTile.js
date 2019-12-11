@@ -1,11 +1,12 @@
 import React from "react";
-import Emoji from "react-emoji-render";
+import ReactCountryFlag from "react-country-flag";
 
 const CountryTile = props => {
   console.log(props);
   const countryData = props.continentData.countries.filter(function(item) {
     return item.name.includes(props.country);
   })[0];
+
   return (
     <div>
       <h2 className="country-name">{props.country}</h2>
@@ -16,8 +17,10 @@ const CountryTile = props => {
           <li>Phone: +{countryData.phone}</li>
           <li>Currency: {countryData.currency}</li>
           <li>
-            Flag: <Emoji text=":)" />
-            {/* this compiler not working with flag emoji, must find other one*/}
+            Flag :{" "}
+            {countryData ? (
+              <ReactCountryFlag code={countryData.code} svg />
+            ) : null}
           </li>
         </ul>
       ) : null}

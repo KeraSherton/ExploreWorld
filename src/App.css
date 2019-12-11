@@ -5,7 +5,8 @@
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+  font-size: 36px;
   margin: 0;
 }
 
@@ -14,7 +15,7 @@
 }
 .continent {
   color: green;
-  text-align: right;
+  text-align: center;
 }
 
 .country-name {
@@ -22,6 +23,7 @@
 }
 .list {
   color: rgb(216, 219, 38);
+  list-style-type: none;
 }
 
 .button {
@@ -30,3 +32,4 @@
   background-color: rgba(54, 150, 83, 0.651);
   border-radius: 50%;
 }
+

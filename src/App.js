@@ -41,6 +41,7 @@ function App(props) {
   const [country, setCountry] = useState("");
   const [code, setCode] = useState("");
   const [userContinent, setUserContinent] = useState("World");
+  // const message = alert("Click World!");
 
   const handleClick = () => {
     if (userContinent === "World") {
@@ -79,7 +80,14 @@ function App(props) {
             {userContinent}
           </div>
         </h1>
-        <input type="image" src={wrld} className="button" alt="Go" />
+        <input
+          type="image"
+          src={wrld}
+          className="button"
+          alt="Go"
+          onClick={handleClick}
+          title="Click me!"
+        />
       </header>
       <div className="country-div">
         {userContinent === "World" ? null : (
