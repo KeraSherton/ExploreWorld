@@ -20,6 +20,7 @@
 
 .country-name {
   color: rgb(206, 41, 41);
+  font-size: 48px;
 }
 .list {
   color: rgb(216, 219, 38);
@@ -27,9 +28,17 @@
 }
 
 .button {
-  height: 50px;
-  width: 50px;
+  height: 100px;
+  width: 100px;
   background-color: rgba(54, 150, 83, 0.651);
   border-radius: 50%;
 }
 
+.input{
+  background-color: rgba(100, 136, 236, 0.63);
+  color: white;
+  border-radius: 5px;
+  padding: 10px 10px;
+  border: none;
+  font-size: 15px;
+}

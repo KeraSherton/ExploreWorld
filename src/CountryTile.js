@@ -8,7 +8,7 @@ const CountryTile = props => {
 
   return (
     <div>
-      <h2 className="country-name">{props.country}</h2>
+      <h3 className="country-name">{props.country}</h3>
 
       {props.country && countryData ? (
         <ul className="list">

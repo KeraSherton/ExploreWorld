@@ -41,7 +41,6 @@ function App(props) {
   const [country, setCountry] = useState("");
   const [code, setCode] = useState("");
   const [userContinent, setUserContinent] = useState("World");
-  // const message = alert("Click World!");
 
   const handleClick = () => {
     if (userContinent === "World") {
@@ -91,9 +90,13 @@ function App(props) {
       </header>
       <div className="country-div">
         {userContinent === "World" ? null : (
-          <select value={country} onChange={e => setCountry(e.target.value)}>
+          <select
+            className="input"
+            value={country}
+            onChange={e => setCountry(e.target.value)}
+          >
             {continentData.countries.map(country => (
-              <option key={country.code} name={country.name}>
+              <option className="option" key={country.code} name={country.name}>
                 {country.name}
               </option>
             ))}
