@@ -2,7 +2,6 @@ import React from "react";
 import ReactCountryFlag from "react-country-flag";
 
 const CountryTile = props => {
-  console.log(props);
   const countryData = props.continentData.countries.filter(function(item) {
     return item.name.includes(props.country);
   })[0];
@@ -14,7 +13,12 @@ const CountryTile = props => {
       {props.country && countryData ? (
         <ul className="list">
           <li>Native name: {countryData.native}</li>
-          <li>Phone: +{countryData.phone}</li>
+          <li>
+            Language:
+            {countryData.languages.map(language => (
+              <> {language.name}</>
+            ))}
+          </li>
           <li>Currency: {countryData.currency}</li>
           <li>
             Flag :{" "}
@@ -22,6 +26,7 @@ const CountryTile = props => {
               <ReactCountryFlag code={countryData.code} svg />
             ) : null}
           </li>
+          <li>Phone: +{countryData.phone}</li>
         </ul>
       ) : null}
     </div>
@@ -29,6 +34,3 @@ const CountryTile = props => {
 };
 
 export default CountryTile;
-
-// language={country.languages.name}
-// currency={country.currency}
