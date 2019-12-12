@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   text-align: center;
   font-size: 36px;
   margin: 0;
@@ -20,11 +19,13 @@
 
 .country-name {
   color: rgb(206, 41, 41);
-  font-size: 48px;
+  font-size: 42px;
+  margin-bottom: 0px;
 }
 .list {
   color: rgb(216, 219, 38);
   list-style-type: none;
+  font-size: 32px;
 }
 
 .button {
@@ -41,4 +42,9 @@
   padding: 10px 10px;
   border: none;
   font-size: 15px;
+}
+
+.example{
+  color: white;
+  font-size: 30px;
 }

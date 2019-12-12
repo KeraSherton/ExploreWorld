@@ -6,7 +6,7 @@ import { QueryRenderer } from "react-relay";
 const ExampleFragment = props => {
   const renderQuery = ({ props }) => {
     if (props) {
-      return <div>{props.continent.name} is great!</div>;
+      return <div className="example">{props.continent.name} is great!</div>;
     }
     return <div>Loading</div>;
   };
