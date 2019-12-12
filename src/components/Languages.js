@@ -1,6 +1,6 @@
 import React from "react";
 import graphql from "babel-plugin-relay/macro";
-import RelayEnvironment from "./RelayEnvironment";
+import RelayEnvironment from "../RelayEnvironment";
 import { QueryRenderer } from "react-relay";
 
 const Languages = props => {

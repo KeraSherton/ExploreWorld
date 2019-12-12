@@ -1,7 +1,7 @@
 import graphql from "babel-plugin-relay/macro";
 
 const ContinentsQuery = graphql`
-  query ContinentsContainerQuery {
+  query ContinentsQuery {
       continents {
         code
         countries {

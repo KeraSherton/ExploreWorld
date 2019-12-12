@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7a118d6599275379c02bab1a87a500a0
+ * @relayHash b2de080318ceddd61a54215d15453734
  */
 
 /* eslint-disable */
@@ -9,8 +9,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type ContinentsContainerQueryVariables = {||};
-export type ContinentsContainerQueryResponse = {|
+export type ContinentsQueryVariables = {||};
+export type ContinentsQueryResponse = {|
   +continents: ?$ReadOnlyArray<?{|
     +code: ?string,
     +countries: ?$ReadOnlyArray<?{|
@@ -26,15 +26,15 @@ export type ContinentsContainerQueryResponse = {|
     |}>,
   |}>
 |};
-export type ContinentsContainerQuery = {|
-  variables: ContinentsContainerQueryVariables,
-  response: ContinentsContainerQueryResponse,
+export type ContinentsQuery = {|
+  variables: ContinentsQueryVariables,
+  response: ContinentsQueryResponse,
 |};
 */
 
 
 /*
-query ContinentsContainerQuery {
+query ContinentsQuery {
   continents {
     code
     countries {
@@ -138,7 +138,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "ContinentsContainerQuery",
+    "name": "ContinentsQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -146,19 +146,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "ContinentsContainerQuery",
+    "name": "ContinentsQuery",
     "argumentDefinitions": [],
     "selections": (v2/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "ContinentsContainerQuery",
+    "name": "ContinentsQuery",
     "id": null,
-    "text": "query ContinentsContainerQuery {\n  continents {\n    code\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n      emoji\n    }\n  }\n}\n",
+    "text": "query ContinentsQuery {\n  continents {\n    code\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n      emoji\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'a6ca825cda4cfdec22dad27e9ea5f2b0';
+(node/*: any*/).hash = '8c9f13e625d664ee9421110623e5c394';
 module.exports = node;
