@@ -6,40 +6,21 @@ import {
   preloadQuery,
   usePreloadedQuery
 } from "react-relay/hooks";
-import graphql from "babel-plugin-relay/macro";
 import RelayEnvironment from "./RelayEnvironment";
 import wrld from "./images/Download-World-PNG-Free-Download.png";
-import CountryTile from "./CountryTile";
+import CountryTile from "./components/CountryTile";
+import ContinentsQuery from "./components/ContinentsQuery";
 
 const { Suspense } = React;
 
-const ContinentQuery = graphql`
-  query AppQuery {
-    continents {
-      code
-      countries {
-        code
-        name
-        native
-        phone
-        languages {
-          name
-        }
-        currency
-        emoji
-      }
-    }
-  }
-`;
-
-const preloadedQuery = preloadQuery(RelayEnvironment, ContinentQuery);
+const preloadedQuery = preloadQuery(RelayEnvironment, ContinentsQuery);
 
 function App(props) {
-  const data = usePreloadedQuery(ContinentQuery, props.preloadedQuery, {});
+  const data = usePreloadedQuery(ContinentsQuery, props.preloadedQuery, {});
   console.log(data);
 
   const [country, setCountry] = useState("");
-  const [code, setCode] = useState("");
+  const [ContinentCode, setCode] = useState("");
   const [userContinent, setUserContinent] = useState("World");
 
   const handleClick = () => {
@@ -67,9 +48,9 @@ function App(props) {
     }
   };
   const continents = data.continents;
-  const continentData = continents.filter(function(item) {
-    return item.code.includes(code);
-  })[0];
+  const continentData = continents.find(item => {
+    return item.code.includes(ContinentCode);
+  });
   return (
     <div className="App">
       <header className="App-header">
