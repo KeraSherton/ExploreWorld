@@ -1,9 +1,9 @@
 import React from "react";
 import graphql from "babel-plugin-relay/macro";
-import RelayEnvironment from "./RelayEnvironment";
+import RelayEnvironment from "../RelayEnvironment";
 import { QueryRenderer } from "react-relay";
 
-const ExampleFragment = props => {
+const Languages = props => {
   console.log(props);
   const renderQuery = ({ props }) => {
     if (props) {
@@ -14,14 +14,14 @@ const ExampleFragment = props => {
             <div>
               Languages:
               {props.country.languages.map(language => (
-                <> {language.name},</>
+                <span key={language.name}> {language.name},</span>
               ))}
             </div>
           ) : (
             <div>
               Language:
               {props.country.languages.map(language => (
-                <> {language.name}</>
+                <span key={language.name}> {language.name}</span>
               ))}
             </div>
           )}
@@ -50,4 +50,4 @@ const ExampleFragment = props => {
   );
 };
 
-export default ExampleFragment;
+export default Languages;

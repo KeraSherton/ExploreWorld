@@ -4,6 +4,7 @@ import ExampleFragment from "./ExampleFragment.js";
 import Languages from "./Languages";
 
 const CountryTile = props => {
+  console.log(props);
   const countryData = props.continentData.countries.find(item => {
     return item.name.includes(props.country);
   });

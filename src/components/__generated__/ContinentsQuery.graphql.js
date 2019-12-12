@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash abeb37f6e0370b01e9ca08cba068e22e
+ * @relayHash b2de080318ceddd61a54215d15453734
  */
 
 /* eslint-disable */
@@ -9,9 +9,9 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type CountryContainerQueryVariables = {||};
-export type CountryContainerQueryResponse = {|
-  +continent: ?{|
+export type ContinentsQueryVariables = {||};
+export type ContinentsQueryResponse = {|
+  +continents: ?$ReadOnlyArray<?{|
     +code: ?string,
     +countries: ?$ReadOnlyArray<?{|
       +code: ?string,
@@ -22,19 +22,20 @@ export type CountryContainerQueryResponse = {|
         +name: ?string
       |}>,
       +currency: ?string,
+      +emoji: ?string,
     |}>,
-  |}
+  |}>
 |};
-export type CountryContainerQuery = {|
-  variables: CountryContainerQueryVariables,
-  response: CountryContainerQueryResponse,
+export type ContinentsQuery = {|
+  variables: ContinentsQueryVariables,
+  response: ContinentsQueryResponse,
 |};
 */
 
 
 /*
-query CountryContainerQuery {
-  continent {
+query ContinentsQuery {
+  continents {
     code
     countries {
       code
@@ -45,6 +46,7 @@ query CountryContainerQuery {
         name
       }
       currency
+      emoji
     }
   }
 }
@@ -69,11 +71,11 @@ v2 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "continent",
+    "name": "continents",
     "storageKey": null,
     "args": null,
     "concreteType": "Continent",
-    "plural": false,
+    "plural": true,
     "selections": [
       (v0/*: any*/),
       {
@@ -119,6 +121,13 @@ v2 = [
             "name": "currency",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "emoji",
+            "args": null,
+            "storageKey": null
           }
         ]
       }
@@ -129,7 +138,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "CountryContainerQuery",
+    "name": "ContinentsQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -137,19 +146,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "CountryContainerQuery",
+    "name": "ContinentsQuery",
     "argumentDefinitions": [],
     "selections": (v2/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "CountryContainerQuery",
+    "name": "ContinentsQuery",
     "id": null,
-    "text": "query CountryContainerQuery {\n  continent {\n    code\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n    }\n  }\n}\n",
+    "text": "query ContinentsQuery {\n  continents {\n    code\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n      emoji\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '180728452cf4800be6c0294a4fabc05e';
+(node/*: any*/).hash = '8c9f13e625d664ee9421110623e5c394';
 module.exports = node;
