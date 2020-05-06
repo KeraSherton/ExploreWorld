@@ -1,6 +1,5 @@
 /**
  * @flow
- * @relayHash 45f1e6306353a32131d2f36d18bc0257
  */
 
 /* eslint-disable */
@@ -41,18 +40,15 @@ query LanguagesQuery(
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = [
   {
+    "defaultValue": null,
     "kind": "LocalArgument",
     "name": "code",
-    "type": "String",
-    "defaultValue": null
+    "type": "String"
   }
 ],
 v1 = [
   {
-    "kind": "LinkedField",
     "alias": null,
-    "name": "country",
-    "storageKey": null,
     "args": [
       {
         "kind": "Variable",
@@ -61,54 +57,58 @@ v1 = [
       }
     ],
     "concreteType": "Country",
+    "kind": "LinkedField",
+    "name": "country",
     "plural": false,
     "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "languages",
-        "storageKey": null,
         "args": null,
         "concreteType": "Language",
+        "kind": "LinkedField",
+        "name": "languages",
         "plural": true,
         "selections": [
           {
-            "kind": "ScalarField",
             "alias": null,
-            "name": "name",
             "args": null,
+            "kind": "ScalarField",
+            "name": "name",
             "storageKey": null
           }
-        ]
+        ],
+        "storageKey": null
       }
-    ]
+    ],
+    "storageKey": null
   }
 ];
 return {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "LanguagesQuery",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
-    "selections": (v1/*: any*/)
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "LanguagesQuery",
+    "selections": (v1/*: any*/),
+    "type": "Query"
   },
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "LanguagesQuery",
-    "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
-    "operationKind": "query",
-    "name": "LanguagesQuery",
     "id": null,
-    "text": "query LanguagesQuery(\n  $code: String\n) {\n  country(code: $code) {\n    languages {\n      name\n    }\n  }\n}\n",
-    "metadata": {}
+    "metadata": {},
+    "name": "LanguagesQuery",
+    "operationKind": "query",
+    "text": "query LanguagesQuery(\n  $code: String\n) {\n  country(code: $code) {\n    languages {\n      name\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
 (node/*: any*/).hash = '5d5846e056df0435b92cb1eb39edb058';
+
 module.exports = node;

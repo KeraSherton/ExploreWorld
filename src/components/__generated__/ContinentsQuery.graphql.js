@@ -1,6 +1,5 @@
 /**
  * @flow
- * @relayHash b2de080318ceddd61a54215d15453734
  */
 
 /* eslint-disable */
@@ -54,111 +53,112 @@ query ContinentsQuery {
 
 const node/*: ConcreteRequest*/ = (function(){
 var v0 = {
-  "kind": "ScalarField",
   "alias": null,
-  "name": "code",
   "args": null,
+  "kind": "ScalarField",
+  "name": "code",
   "storageKey": null
 },
 v1 = {
-  "kind": "ScalarField",
   "alias": null,
-  "name": "name",
   "args": null,
+  "kind": "ScalarField",
+  "name": "name",
   "storageKey": null
 },
 v2 = [
   {
-    "kind": "LinkedField",
     "alias": null,
-    "name": "continents",
-    "storageKey": null,
     "args": null,
     "concreteType": "Continent",
+    "kind": "LinkedField",
+    "name": "continents",
     "plural": true,
     "selections": [
       (v0/*: any*/),
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "countries",
-        "storageKey": null,
         "args": null,
         "concreteType": "Country",
+        "kind": "LinkedField",
+        "name": "countries",
         "plural": true,
         "selections": [
           (v0/*: any*/),
           (v1/*: any*/),
           {
-            "kind": "ScalarField",
             "alias": null,
+            "args": null,
+            "kind": "ScalarField",
             "name": "native",
-            "args": null,
             "storageKey": null
           },
           {
+            "alias": null,
+            "args": null,
             "kind": "ScalarField",
-            "alias": null,
             "name": "phone",
-            "args": null,
             "storageKey": null
           },
           {
-            "kind": "LinkedField",
             "alias": null,
-            "name": "languages",
-            "storageKey": null,
             "args": null,
             "concreteType": "Language",
+            "kind": "LinkedField",
+            "name": "languages",
             "plural": true,
             "selections": [
               (v1/*: any*/)
-            ]
-          },
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "currency",
-            "args": null,
+            ],
             "storageKey": null
           },
           {
-            "kind": "ScalarField",
             "alias": null,
-            "name": "emoji",
             "args": null,
+            "kind": "ScalarField",
+            "name": "currency",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "emoji",
             "storageKey": null
           }
-        ]
+        ],
+        "storageKey": null
       }
-    ]
+    ],
+    "storageKey": null
   }
 ];
 return {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "ContinentsQuery",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
-    "selections": (v2/*: any*/)
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "ContinentsQuery",
+    "selections": (v2/*: any*/),
+    "type": "Query"
   },
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "ContinentsQuery",
-    "argumentDefinitions": [],
     "selections": (v2/*: any*/)
   },
   "params": {
-    "operationKind": "query",
-    "name": "ContinentsQuery",
     "id": null,
-    "text": "query ContinentsQuery {\n  continents {\n    code\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n      emoji\n    }\n  }\n}\n",
-    "metadata": {}
+    "metadata": {},
+    "name": "ContinentsQuery",
+    "operationKind": "query",
+    "text": "query ContinentsQuery {\n  continents {\n    code\n    countries {\n      code\n      name\n      native\n      phone\n      languages {\n        name\n      }\n      currency\n      emoji\n    }\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
 (node/*: any*/).hash = '8c9f13e625d664ee9421110623e5c394';
+
 module.exports = node;

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactCountryFlag from "react-country-flag";
-import ExampleFragment from "./ExampleFragment.js";
 import Languages from "./Languages";
 
 const CountryTile = props => {
@@ -28,8 +27,6 @@ const CountryTile = props => {
             </li>
             <li>Phone: +{countryData.phone}</li>
           </ul>
-
-          <ExampleFragment continent={props.continentData.code} />
         </div>
       ) : null}
     </>
