@@ -1,6 +1,6 @@
 {
-  "name": "fuck-app",
-  "version": "0.1.0",
+  "name": "world-app",
+  "version": "0.1.199679679969",
   "private": true,
   "dependencies": {
     "react": "^16.12.0",

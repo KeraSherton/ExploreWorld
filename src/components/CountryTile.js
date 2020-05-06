@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCountryFlag from "react-country-flag";
-import Languages from "./Languages";
+
 
 const CountryTile = props => {
   console.log(props);
@@ -16,7 +16,10 @@ const CountryTile = props => {
           <ul className="list">
             <li>Native name: {countryData.native}</li>
             <li>
-              <Languages code={countryData.code} />
+            Languages:
+              {countryData.languages.map(language => (
+                <span key={language.name}> {language.name} </span>
+              ))}
             </li>
             <li>Currency: {countryData.currency}</li>
             <li>
