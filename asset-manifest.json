@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ExploreWorld/static/css/main.e8b25d72.chunk.css",
+    "main.js": "/ExploreWorld/static/js/main.19daf7e9.chunk.js",
+    "main.js.map": "/ExploreWorld/static/js/main.19daf7e9.chunk.js.map",
+    "runtime-main.js": "/ExploreWorld/static/js/runtime-main.5e187b4c.js",
+    "runtime-main.js.map": "/ExploreWorld/static/js/runtime-main.5e187b4c.js.map",
+    "static/js/2.cea77c84.chunk.js": "/ExploreWorld/static/js/2.cea77c84.chunk.js",
+    "static/js/2.cea77c84.chunk.js.map": "/ExploreWorld/static/js/2.cea77c84.chunk.js.map",
+    "index.html": "/ExploreWorld/index.html",
+    "precache-manifest.2acf0dd5ca0c60772622af07302b378a.js": "/ExploreWorld/precache-manifest.2acf0dd5ca0c60772622af07302b378a.js",
+    "service-worker.js": "/ExploreWorld/service-worker.js",
+    "static/css/main.e8b25d72.chunk.css.map": "/ExploreWorld/static/css/main.e8b25d72.chunk.css.map",
+    "static/media/Download-World-PNG-Free-Download.png": "/ExploreWorld/static/media/Download-World-PNG-Free-Download.ef22a519.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5e187b4c.js",
+    "static/js/2.cea77c84.chunk.js",
+    "static/css/main.e8b25d72.chunk.css",
+    "static/js/main.19daf7e9.chunk.js"
+  ]
+}
